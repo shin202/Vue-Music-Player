@@ -1,5 +1,5 @@
 <template>
-    <div v-if="route.path !== '/' && current_song_store.current_song.encodeId"
+    <div v-show="route.path !== '/' && current_song_store.current_song.encodeId"
         class="mini-player fixed w-[82%] h-[9rem] left-[18%] bottom-0 shadow-lg z-[999] py-4">
         <div
             class="container w-full h-full flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-center items-center space-x-6 space-y-3 overflow-hidden">

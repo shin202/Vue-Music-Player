@@ -24,6 +24,9 @@
         <template #duration>
           <span>{{ get_time(song.duration) }}</span>
         </template>
+        <template #fav>
+          <ion-icon name="heart"></ion-icon>
+        </template>
       </songs-list-item-vue>
     </ul>
     <ul v-else class="songs__list flex flex-col h-full overflow-hidden">
