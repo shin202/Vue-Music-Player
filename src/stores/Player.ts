@@ -15,7 +15,7 @@ export const use_player_store = defineStore('player_store', () => {
     const player = new Audio();
     const is_playing = ref<boolean>(false);
     const current_song_index = ref<number>(current_song_store.current_song.index ? current_song_store.current_song.index : 0);
-    const total_songs = computed(() => current_playlist_store.current_playlist.song.total);
+    const total_songs = current_playlist_store.current_playlist.song.total;
     const volume_progress = ref<number>(1);
 
     // Init Player

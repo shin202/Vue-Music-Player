@@ -1,6 +1,17 @@
-# client
+# Vue Music App
+
+A music app built with Vue3(Vite) using ZingMp3API
 
 This template should help get you started developing with Vue 3 in Vite.
+
+## Technology used
+
+* Vue3
+* Vite
+* Pinia
+* Typescript
+* SCSS
+* TailwindCSS
 
 ## Recommended IDE Setup
 
