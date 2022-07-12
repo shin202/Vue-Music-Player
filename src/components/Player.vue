@@ -1,7 +1,7 @@
 <template>
     <div
         class="music-player bg-[#fcfcfc] shadow-lg rounded-lg flex flex-col justify-between items-center p-4 text-center">
-        <div class="music-player__inner w-[35rem] h-[40rem] bg-white shadow-xl rounded-[4rem] px-[3rem]">
+        <div class="music-player__inner w-[35rem] h-[40rem] bg-white shadow-xl rounded-[4rem] px-[3rem] py-4">
             <div class="music-player-song flex flex-col justify-center items-center space-y-4">
                 <div class="music-player-song__cd spin bg-white w-[20rem] max-w-[20rem] h-[20rem] rounded-[50%] shadow-lg overflow-hidden relative"
                     :style="{

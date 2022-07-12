@@ -9,9 +9,7 @@
             <slot name="image" />
         </div>
         <div class="songs__play text-gr text-3xl cursor-pointer">
-            <slot name="play-button">
-
-            </slot>
+            <slot name="play-button"/>
         </div>
         <span class="songs__name font-bold max-w-[10rem] w-[10rem] text-center">
             <slot name="name" />
@@ -23,8 +21,7 @@
             <slot name="duration" />
         </span>
         <div class="songs__fav text-gr text-3xl cursor-pointer" @click="toggle_fav">
-            <slot name="fav">
-            </slot>
+            <slot name="fav"/>
         </div>
     </li>
 </template>

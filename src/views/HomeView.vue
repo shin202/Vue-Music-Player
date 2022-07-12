@@ -32,7 +32,7 @@
                             <span v-else>{{ total_song }} Songs</span>
                         </template>
                     </heading-vue>
-                    <songs-list-vue :songs="songs" :is_loading="is_loading" :playlist-id="playlist?.encodeId" class="w-full h-[50rem] max-h-[50rem] overflow-y-scroll overflow-x-hidden" />
+                    <songs-list-vue :songs="songs" :is_loading="is_loading" :playlist-id="playlist?.encodeId" class="w-full h-[52rem] max-h-[52rem] overflow-y-scroll overflow-x-hidden" />
                 </div>
                 <!-- Playlist -->
                 <!-- Player -->
@@ -47,7 +47,7 @@
                             <span v-else>{{ current_song_title }}</span>
                         </template>
                     </heading-vue>
-                    <player-vue :is_loading="is_loading" class="w-full m-4 h-[50rem] max-h-[50rem]" />
+                    <player-vue :is_loading="is_loading" class="w-full m-4 h-[52rem] max-h-[52rem]" />
                 </div>
                 <!-- Player -->
             </div>

@@ -1,14 +1,13 @@
 import { defineStore } from "pinia";
-import { use_songs_store } from "./Songs";
+import { get_song } from "@/api/Song";
 import { use_current_song_store } from "./CurrentSong";
 import Swal from "sweetalert2";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { use_current_playlist_store } from "./CurrentPlaylist";
 import { use_playlists_store } from "./Playlists";
 import type { song_type } from "@/types";
 
 export const use_player_store = defineStore('player_store', () => {
-    const songs_store = use_songs_store();
     const current_song_store = use_current_song_store();
     const current_playlist_store = use_current_playlist_store();
     const playlist_store = use_playlists_store();
@@ -94,7 +93,7 @@ export const use_player_store = defineStore('player_store', () => {
     const fetch_song = (song: song_type, index: number): Promise<song_type | undefined> => {
         return new Promise<song_type>(async (resolve, reject) => {
             current_song_index.value = index;
-            const res = await songs_store.fetch_song(song.encodeId);
+            const res = await get_song(song.encodeId);
 
             if (res.msg === "Success") {
                 resolve({...song, ...res.data, index: index});
