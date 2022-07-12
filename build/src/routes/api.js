@@ -1,0 +1,34 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const ZingController_1 = __importDefault(require("../controllers/ZingController"));
+const router = express_1.default.Router();
+router.get('/', ZingController_1.default.get_home);
+router.get('/song', ZingController_1.default.get_song);
+router.get('/song/info', ZingController_1.default.get_song_info);
+router.get('/song/lyrics', ZingController_1.default.get_song_lyrics);
+router.get('/chart/home', ZingController_1.default.get_home_chart);
+router.get('/chart/new-release', ZingController_1.default.get_new_release_chart);
+router.get('/chart/week', ZingController_1.default.get_week_chart);
+router.get('/radio', ZingController_1.default.get_radio);
+router.get('/newfeeds', ZingController_1.default.get_new_feeds);
+router.get('/artist', ZingController_1.default.get_artist);
+router.get('/hub/home', ZingController_1.default.get_hub_home);
+router.get('/hub/detail', ZingController_1.default.get_hub_detail);
+router.get('/top-100', ZingController_1.default.get_top_100);
+router.get('/mv/list', ZingController_1.default.get_list_mv);
+router.get('/mv/category', ZingController_1.default.get_category_mv);
+router.get('/mv/detail', ZingController_1.default.get_mv);
+router.get('/playlist', ZingController_1.default.get_playlist);
+router.get('/playlist/section-bottom', ZingController_1.default.get_suggested_playlists);
+router.get('/events', ZingController_1.default.get_events);
+router.get('/events/detail', ZingController_1.default.get_event_detail);
+router.get('/search', ZingController_1.default.search_all);
+router.get('/search/type', ZingController_1.default.search_by_type);
+router.get('/recommend-keyword', ZingController_1.default.get_recommend_keyword);
+router.get('/suggestion-keyword', ZingController_1.default.get_suggestion_keyword);
+exports.default = router;
+//# sourceMappingURL=api.js.map
