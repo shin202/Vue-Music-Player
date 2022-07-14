@@ -1,5 +1,5 @@
 <template>
-    <div class="page-404 flex justify-center items-center">
+    <section class="page-404 flex justify-center items-center">
         <div class="page-404__inner w-full h-full mt-[8.5rem] flex justify-center items-center space-x-24">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 800 600" style="visibility: visible;">
@@ -292,12 +292,12 @@
                     <span>OOPS. You're lost</span>
                     <span>This page does not exist!</span>
                 </div>
-                <router-link to="/">
+                <RouterLink to="/">
                     <div class="btn mt-6 w-[60%] text-center border-4 border-green-400 rounded-full p-4 cursor-pointer">Back to Home</div>
-                </router-link>
+                </RouterLink>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script setup lang="ts">

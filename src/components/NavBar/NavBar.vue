@@ -1,28 +1,24 @@
 <template>
-    <header class="header fixed top-0 z-[999]" :class="{'scroll': is_scroll}">
+    <header class="header fixed top-0 z-[999]" :class="{'scroll': isScroll}">
         <div class="header__inner container h-[5rem] flex justify-between items-center gap-[10rem]">
-            <search-box-vue />
+            <SearchBox />
             <div class="header-menu ml-auto">
-                <nav-bar-list-vue />
+                <NavBarList />
             </div>
         </div>
     </header>
 </template>
 
 <script setup lang="ts">
-import SearchBoxVue from '@/components/SearchBox.vue';
-import NavBarListVue from './NavBarList.vue';
+import SearchBox from '../../components/SearchBox.vue';
+import NavBarList from './NavBarList.vue';
 import { onMounted, ref } from 'vue';
 
-const is_scroll = ref<boolean>(false);
+const isScroll = ref<boolean>(false);
 
 onMounted(() => {
     document.addEventListener<"scroll">("scroll", () => {
-        if (window.scrollY > 20) {
-            is_scroll.value = true;
-        } else {
-            is_scroll.value = false;
-        }
+        isScroll.value = window.scrollY > 20 ? true : false;
     });
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
     <li class="songs__item sticky bottom-0 flex justify-around items-center gap-[1rem] bg-white m-4 p-4 h-[6rem] max-h-[6rem] shadow-md rounded-lg"
-        :class="{ 'favorited': is_fav }">
+        :class="{ 'favorited': isFav }">
         <slot />
         <span class="songs__order font-bold max-w-[3rem] w-[3rem]">
             <slot name="order" />
@@ -20,7 +20,7 @@
         <span class="songs__duration text-gr max-w-[4.5rem] w-[4.5rem] hidden lg:inline md:inline sm:inline">
             <slot name="duration" />
         </span>
-        <div class="songs__fav text-gr text-3xl cursor-pointer" @click="toggle_fav">
+        <div class="songs__fav text-gr text-3xl cursor-pointer" @click="toggleFav">
             <slot name="fav"/>
         </div>
     </li>
@@ -29,10 +29,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const is_fav = ref<boolean>(false);
+const isFav = ref<boolean>(false);
 
-const toggle_fav = (): void => {
-    is_fav.value = !is_fav.value;
+const toggleFav = (): void => {
+    isFav.value = !isFav.value;
 }
 </script>
 

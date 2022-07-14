@@ -1,61 +1,66 @@
 <template>
   <div class="songs">
-    <ul v-if="!is_loading && songs.length > 0" class="songs__list flex flex-col h-full">
-      <songs-list-item-vue v-for="(song, index) in songs" :key="song.encodeId" :class="{'playing': player_store.is_playing && current_song_store.current_song.encodeId === song.encodeId}">
+    <ul v-if="!hasSkeleton" class="songs__list flex flex-col h-full">
+      <SongsListItem v-for="(song, index) in songList" :key="song.encodeId" :class="{'playing': isPlaying && currentSongId === song.encodeId}">
         <template #order>
-          <span>{{ index + 1 }}</span>
+          <span v-text="index + 1"/>
         </template>
         <template #image>
           <img
             :src="song.thumbnailM"
-            class="w-full h-full object-cover"
+            class="thumbnail w-full h-full object-cover"
           />
         </template>
         <template #play-button>
-            <ion-icon v-if="player_store.is_playing && current_song_store.current_song.encodeId === song.encodeId" name="pause-outline" @click="player_store.pause"></ion-icon>
-            <ion-icon v-else name="play-outline" @click="player_store.start(song, index, playlistId)"></ion-icon>
+            <ion-icon v-if="isPlaying && currentSongId === song.encodeId" name="pause-outline" @click="playerStore.pause"></ion-icon>
+            <ion-icon v-else name="play-outline" @click="playerStore.start(song, index, playlistId)" />
         </template>
         <template #name>
-          <span>{{ song.title }}</span>
+          <span v-text="song.title" />
         </template>
         <template #artist>
-          <span>{{ song.artistsNames }}</span>
+          <span v-text="song.artistsNames" />
         </template>
         <template #duration>
-          <span>{{ get_time(song.duration) }}</span>
+          <span v-text="getTime(song.duration)" />
         </template>
         <template #fav>
-          <ion-icon name="heart"></ion-icon>
+          <ion-icon name="heart" />
         </template>
-      </songs-list-item-vue>
+      </SongsListItem>
     </ul>
     <ul v-else class="songs__list flex flex-col h-full overflow-hidden">
-      <songs-list-item-vue class="relative" v-for="i in 10">
-        <skeleton-loading class="absolute z-10" />
-        <template #fav>
-          <div></div>
-        </template>
-      </songs-list-item-vue>
+      <SongsListItem class="relative" v-for="i in 10">
+        <SkeletonLoading class="absolute z-10" />
+      </SongsListItem>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import SongsListItemVue from './SongsListItem.vue';
+import SongsListItem from './SongsListItem.vue';
 import SkeletonLoading from './Skeleton/SkeletonLoading.vue';
-import { use_current_song_store } from '@/stores/CurrentSong';
-import { use_player_store } from '@/stores/Player';
-import { get_time } from '@/composables/time';
+import { computed } from 'vue';
+import { useCurrentSong } from '../stores/CurrentSong';
+import { usePlayer } from '../stores/Player';
+import { getTime } from '../composables/GetTime';
+import type { Song } from '../types/Types';
 
-const props = defineProps<{
-  songs: any,
+interface Props {
+  songList: Song[] | undefined,
   playlistId: any,
-  is_loading: boolean,
-}>();
+  isLoading: boolean,
+}
 
-const player_store = use_player_store();
-const current_song_store = use_current_song_store();
-player_store.autoplay();
+const props = defineProps<Props>();
+const playerStore = usePlayer();
+const currentSongStore = useCurrentSong();
+
+const currentSongId = computed(() => currentSongStore.currentSong.encodeId); 
+const isPlaying = computed(() => playerStore.isPlaying);
+const hasSkeleton = computed(() => props.isLoading);
+
+playerStore.autoplay();
 </script>
 
 <style lang="scss" scoped>

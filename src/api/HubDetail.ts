@@ -1,10 +1,10 @@
-import instance from "@/composables/axios";
+import requests from "../utils/Axios";
 
 const path = "/api/hub/detail";
 
-const get_hub_detail = async (id: string): Promise<any> => {
+export const getHubDetail = async (id: string | any): Promise<any> => {
     try {
-        const res = await instance.get(path, {
+        const res = await requests.get(path, {
             params: {
                 id: id,
             }
@@ -15,5 +15,3 @@ const get_hub_detail = async (id: string): Promise<any> => {
         console.log(error);
     }
 }
-
-export { get_hub_detail }

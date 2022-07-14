@@ -4,10 +4,8 @@
             class="sidebar-menu__item h-[5rem] flex justify-start items-center hover:text-secondary cursor-pointer px-4 space-x-8"
             :class="{'active': $route.path === link}"
         >
-            <ion-icon :name="icon" class="sidebar-menu__icon text-gr text-[2.5rem] flex-1 lg:flex-none"></ion-icon>
-            <h3 class="sidebar-menu__title hidden lg:inline md:hidden sm:hidden truncate">
-                {{ title }}
-            </h3>
+            <ion-icon :name="icon" class="sidebar-menu__icon text-gr text-[2.5rem] flex-1 lg:flex-none" />
+            <h3 class="sidebar-menu__title hidden lg:inline md:hidden sm:hidden truncate" v-text="title"/>
         </li>
     </router-link>
 </template>

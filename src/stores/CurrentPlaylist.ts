@@ -1,10 +1,9 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { playlist_type } from "@/types";
+import type { Playlist } from "../types/Types";
 
-export const use_current_playlist_store = defineStore('current_playlist_store', () => {
-
-    const current_playlist = ref<playlist_type>({
+export const useCurrentPlaylist = defineStore('currentPlaylist', () => {
+    const currentPlaylist = ref<Playlist>({
         encodeId: '',
         title: '',
         thumbnailM: '',
@@ -19,13 +18,13 @@ export const use_current_playlist_store = defineStore('current_playlist_store', 
         }
     });
 
-    const set_current_playlist = (playlist: playlist_type) => {
-        current_playlist.value = playlist;
+    const setCurrentPlaylist = (playlist: Playlist) => {
+        currentPlaylist.value = playlist;
     }
 
     return {
-        set_current_playlist,
-        current_playlist,
+        setCurrentPlaylist,
+        currentPlaylist,
     }
 }, {
     persist: true,

@@ -1,37 +1,35 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { song_type } from "@/types";
+import type { Song } from "../types/Types";
 
-export const use_current_song_store = defineStore('current_song_store', () => {
-
-    const current_song = ref<song_type>({
+export const useCurrentSong = defineStore('currentSong', () => {
+    const currentSong = ref<Song>({
         encodeId: '',
         index: 0,
         artistsNames: '',
-        title:'',
+        title: '',
         thumbnailM: '',
         duration: 0,
         currentTime: 0,
         "128": '',
         "320": '',
     });
+    const songProgress = ref<number>(0);
 
-    const song_progress = ref<number>(0);
-
-    const set_current_song = (song: song_type) => {
-        current_song.value = song;
+    const setCurrentSong = (song: Song): void => {
+        currentSong.value = song;
     }
 
-    const update_progress = (): void => {
-        const progress_percent = Math.ceil(current_song.value.currentTime / current_song.value.duration * 100);
-        song_progress.value = progress_percent;
+    const updateSongProgress = (): void => {
+        const progressPercent = Math.ceil(currentSong.value.currentTime / currentSong.value.duration * 100);
+        songProgress.value = progressPercent;
     }
 
     return {
-        set_current_song,
-        update_progress,
-        current_song,
-        song_progress,
+        setCurrentSong,
+        updateSongProgress,
+        currentSong,
+        songProgress
     }
 }, {
     persist: true,

@@ -12,7 +12,7 @@
     <ion-icon
       name="search-outline"
       class="absolute top-[50%] left-[1.5rem] translate-y-[-60%] text-3xl text-gr"
-    ></ion-icon>
+    />
   </div>
 </template>
 

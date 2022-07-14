@@ -1,50 +1,39 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { get_playlist, get_suggested_playlists } from "@/api/Playlist";
-import type { playlist_type, suggested_playlists_type } from "@/types";
+import { getPlaylist, getSuggestedPlaylists } from "../api/Playlist";
+import type { Playlist, SuggestedPlaylist } from "../types/Types";
 
-export const use_playlists_store = defineStore('playlists_store', () => {
-    const playlists = ref<playlist_type[]>([]);
+export const usePlaylists = defineStore('playlists', () => {
+    const playlists = ref<Playlist[]>([]);
 
-    const fetch_playlist = async (id: string) => {
-        const data = await get_playlist(id);
-        return data.data;
-    }
-
-    const set_playlist = async (id: string) => {
-        if (existed_playlist(id)) {
-            return;
-        }
-        
-        const data = await fetch_playlist(id);
-
-        playlists.value.push(data);
-    }
-
-    const get_stored_playlist = (id: string) => {
-        return playlists.value.find(playlist => playlist.encodeId === id);
-    }
-
-    const existed_playlist = (id: string): boolean => {
+    const existedPlaylist = (id: string | any): boolean => {
         return playlists.value.some(playlist => {
-            if (playlist.encodeId === id) {
-                return true;
-            }
-
+            if (playlist.encodeId === id) return true;
             return false;
         });
     }
 
-    const fetch_suggested_playlists = async (id: string) => {
-        const data: suggested_playlists_type = await get_suggested_playlists(id);
-        return data.data.filter((playlists: suggested_playlists_type) => playlists.sectionType === "playlist");
+    const fetchPlaylist = async (id: string | any) => {
+        if (existedPlaylist(id)) return;
+        
+        const data = await getPlaylist(id);
+        playlists.value.push(data.data);
+    }
+
+    const getStoredPlaylist = (id: string | any) => {
+        return playlists.value.find(playlist => playlist.encodeId === id);
+    }
+
+    const fetchSuggestedPlaylist = async (id: string | any) => {
+        const data: SuggestedPlaylist = await getSuggestedPlaylists(id);
+        return data.data.filter((playlists: SuggestedPlaylist) => playlists.sectionType === "playlist");
     }
 
     return {
-        fetch_playlist,
-        set_playlist,
-        get_stored_playlist,
+        fetchPlaylist,
+        existedPlaylist,
+        getStoredPlaylist,
+        fetchSuggestedPlaylist,
         playlists,
-        fetch_suggested_playlists,
     }
 });

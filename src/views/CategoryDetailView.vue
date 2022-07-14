@@ -1,33 +1,32 @@
 <template>
     <section class="category-detail h-full overflow-x-hidden overflow-y-auto">
         <div class="category-detail__banner w-full mt-[8.5rem] bg-gray-200 relative mb-[3rem]">
-            <img v-if="!is_loading" :src="hub_detail?.cover" :alt="hub_detail?.title"
+            <img v-if="!isLoading" :src="hubDetail?.cover" :alt="hubDetail?.title"
                 class="cover w-full h-full object-cover">
         </div>
-        <suggested-playlist-vue :suggested_playlists="playlists" :is_loading="is_loading" />
+        <SuggestedPlaylist :suggestedPlaylists="playlists" :isLoading="isLoading" />
     </section>
 </template>
 
 <script setup lang="ts">
-import SuggestedPlaylistVue from '@/components/SuggestedPlaylist.vue';
-import { get_hub_detail } from '@/api/HubDetail';
-import { watchEffect } from '@vue/runtime-core';
-import { ref } from 'vue';
+import SuggestedPlaylist from '../components/SuggestedPlaylist.vue';
+import { getHubDetail } from '../api/HubDetail';
+import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
-import type { hub_detail_type } from '@/types';
+import type { HubDetail } from '../types/Types';
 
-const hub_detail = ref<hub_detail_type>();
+const hubDetail = ref<HubDetail>();
 const route = useRoute();
-const is_loading = ref<boolean>(true);
-const playlists = ref<any>();
+const isLoading = ref<boolean>(true);
+const playlists = ref<any>(null);
 
 watchEffect(async () => {
     if (route.name === "CategoryDetail" && route.params.id) {
-        is_loading.value = true;
-        const data = await get_hub_detail(route.params.id);
-        hub_detail.value = data.data;
-        playlists.value = hub_detail.value?.sections.filter(section => section.sectionType === "playlist");
-        is_loading.value = false;
+        isLoading.value = true;
+        const data = await getHubDetail(route.params.id);
+        hubDetail.value = data.data;
+        playlists.value = hubDetail.value?.sections.filter(section => section.sectionType === "playlist");
+        isLoading.value = false;
     }
 });
 </script>
