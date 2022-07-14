@@ -15,7 +15,8 @@ export const useCurrentPlaylist = defineStore('currentPlaylist', () => {
         song: {
             items: [],
             total: 0,
-        }
+        },
+        items: [],
     });
 
     const setCurrentPlaylist = (playlist: Playlist) => {
