@@ -14,7 +14,6 @@ export const usePlayer = defineStore('player', () => {
     const player = new Audio();
     const isPlaying = ref<boolean>(false);
     const currentSongIndex = ref<number>(currentSongStore.currentSong.index?? 0);
-    const totalSongs = currentPlaylistStore.currentPlaylist.song.total;
     const volumeProgress = ref<number>(1);
     const currentSongTime = computed(() => currentSongStore.currentSong.currentTime);
     const currentSongId = computed(() => currentSongStore.currentSong.encodeId);
@@ -23,6 +22,8 @@ export const usePlayer = defineStore('player', () => {
     const setCurrentSongIndex = (index: number): void => {
         currentSongIndex.value = index;
     }
+
+    const getTotalSong = (): number => (currentPlaylistStore.currentPlaylist.song.total);
 
     // Fetch Song Data
     const fetchSong = (song: Song, index: number): Promise<Song | undefined> => {
@@ -85,6 +86,7 @@ export const usePlayer = defineStore('player', () => {
 
     const next = async (): Promise<void> => {
         currentSongIndex.value++;
+        const totalSongs = getTotalSong();
         if (currentSongIndex.value > totalSongs - 1) {
             setCurrentSongIndex(0);
         }
@@ -102,6 +104,7 @@ export const usePlayer = defineStore('player', () => {
 
     const prev = async (): Promise<void> => {
         currentSongIndex.value--;
+        const totalSongs = getTotalSong();
         if (currentSongIndex.value < 0) {
             setCurrentSongIndex(totalSongs - 1);
         }
