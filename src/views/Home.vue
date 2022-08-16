@@ -79,7 +79,7 @@ import MusicList from "../components/MusicList.vue";
 import FavoriteArtists from "../components/FavoriteArtists.vue";
 import Button from "../components/Button/Button.vue";
 import { ref, onMounted, toRefs, computed } from "vue";
-import type { HomeData, Banner, Playlist, NewRelease, Artist, Song, WeekChart } from "../types/Types";
+import type { HomeData, Banner, Playlist, NewRelease, FavoriteArtist, Song, WeekChart } from "../types/Types";
 import { getHome } from "../api/Home";
 import { useGlobal } from "../stores/Global";
 
@@ -88,7 +88,7 @@ const homeData = ref<HomeData[]>([]);
 const banner = ref<Banner[]>([]);
 const playlists = ref<Playlist[]>([]);
 const newRelease = ref<NewRelease>();
-const favoriteArtists = ref<Artist[]>([]);
+const favoriteArtists = ref<FavoriteArtist[]>([]);
 const chart = ref<Song[]>([]);
 const weekChart = ref<WeekChart[]>([]);
 
