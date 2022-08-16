@@ -50,11 +50,11 @@ import ArtistCard from "./Card/MusicCard.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import { computed } from "vue";
-import type { Artist } from "../types/Types";
+import type { FavoriteArtist } from "../types/Types";
 import { useGlobal } from "../stores/Global";
 
 interface Props {
-    favoriteArists: Artist[];
+    favoriteArists: FavoriteArtist[];
 }
 
 const props = defineProps<Props>();

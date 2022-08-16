@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getPlaylist, getSuggestedPlaylists } from "../api/Playlist";
-import type { Playlist, SuggestedPlaylist } from "../types/Types";
+import type { Playlist, SectionBottom } from "../types/Types";
 
 export const usePlaylists = defineStore('playlistsStore', () => {
     const playlists = ref<Playlist[]>([]);
@@ -23,16 +23,10 @@ export const usePlaylists = defineStore('playlistsStore', () => {
         return playlists.value.find(playlist => playlist.encodeId === id);
     }
 
-    const fetchSuggestedPlaylist = async (id: string | any) => {
-        const data: SuggestedPlaylist = await getSuggestedPlaylists(id);
-        return data.data.filter((playlists: SuggestedPlaylist) => playlists.sectionType === "playlist");
-    }
-
     return {
         fetchPlaylist,
         existedPlaylist,
         getStoredPlaylist,
-        fetchSuggestedPlaylist,
         playlists,
     }
 });

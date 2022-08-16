@@ -54,6 +54,15 @@ interface Artist {
     totalFollow: number
 }
 
+interface FavoriteArtist {
+    encodeId: string,
+    thumbnailM: string,
+    artistsNames: string,
+    song: {
+        items: [],
+    }
+}
+
 interface Song {
     encodeId: string,
     index: number,
@@ -102,4 +111,4 @@ interface Top100 {
     items: [],
 }
 
-export type { HomeData, Banner, NewRelease, WeekChart, Playlist, Artist, Song, SectionBottom, Section, Hub, HubDetail, Top100 }
+export type { HomeData, Banner, NewRelease, WeekChart, Playlist, Artist, FavoriteArtist, Song, SectionBottom, Section, Hub, HubDetail, Top100 }
