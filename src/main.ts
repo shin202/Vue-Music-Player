@@ -9,6 +9,8 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import VueLazyload from "vue-lazyload";
+import FloatingVue from "floating-vue";
+import "floating-vue/dist/style.css";
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -24,5 +26,5 @@ app.use(VueLazyload, {
         threshold: 0.1,
     }
 });
-
+app.use(FloatingVue);
 app.mount("#app");

@@ -9,4 +9,6 @@ const padTo2Digits = (number: number): string => {
     return number.toString().padStart(2, '0');
 }
 
-export { getTime, padTo2Digits }
+const timestampToDate = (timestamp: number): string => (new Date(timestamp * 1000).toLocaleDateString());
+
+export { getTime, padTo2Digits, timestampToDate }

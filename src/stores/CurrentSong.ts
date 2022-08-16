@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import type { Song } from "../types/Types";
 
-export const useCurrentSong = defineStore('currentSong', () => {
+export const useCurrentSong = defineStore('currentSongStore', () => {
     const currentSong = ref<Song>({
         encodeId: '',
         index: 0,

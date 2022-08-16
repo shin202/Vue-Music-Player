@@ -7,7 +7,7 @@ import { usePlaylists } from "./Playlists";
 import { showAlert } from "../composables/Alert";
 import type { Song } from "../types/Types";
 
-export const usePlayer = defineStore('player', () => {
+export const usePlayer = defineStore('playerStore', () => {
     const currentSongStore = useCurrentSong();
     const currentPlaylistStore = useCurrentPlaylist();
     const playlistsStore = usePlaylists();
@@ -87,6 +87,8 @@ export const usePlayer = defineStore('player', () => {
     const next = async (): Promise<void> => {
         currentSongIndex.value++;
         const totalSongs = getTotalSong();
+
+        if (totalSongs === 0) return;
         if (currentSongIndex.value > totalSongs - 1) {
             setCurrentSongIndex(0);
         }
@@ -105,6 +107,8 @@ export const usePlayer = defineStore('player', () => {
     const prev = async (): Promise<void> => {
         currentSongIndex.value--;
         const totalSongs = getTotalSong();
+
+        if (totalSongs === 0) return;
         if (currentSongIndex.value < 0) {
             setCurrentSongIndex(totalSongs - 1);
         }
@@ -127,7 +131,7 @@ export const usePlayer = defineStore('player', () => {
         });
     }
 
-    const existedCurrentSong = (id: string): boolean => (currentSongId.value === id ? true : false);
+    const existedCurrentSong = (id: string): boolean => (currentSongId.value === id);
 
     const start = async (song: Song, index: number, playlistId: string): Promise<void> => {
         if (existedCurrentSong(song.encodeId)) {

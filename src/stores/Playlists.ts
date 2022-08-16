@@ -3,13 +3,12 @@ import { ref } from "vue";
 import { getPlaylist, getSuggestedPlaylists } from "../api/Playlist";
 import type { Playlist, SuggestedPlaylist } from "../types/Types";
 
-export const usePlaylists = defineStore('playlists', () => {
+export const usePlaylists = defineStore('playlistsStore', () => {
     const playlists = ref<Playlist[]>([]);
 
     const existedPlaylist = (id: string | any): boolean => {
         return playlists.value.some(playlist => {
-            if (playlist.encodeId === id) return true;
-            return false;
+            return playlist.encodeId === id;
         });
     }
 

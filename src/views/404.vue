@@ -1,7 +1,7 @@
 <template>
     <section class="page-404 flex justify-center items-center">
-        <div class="page-404__inner w-full h-full mt-[8.5rem] flex justify-center items-center space-x-24">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        <div class="page-404__inner container w-full h-full flex justify-center items-center space-x-4">
+            <svg class="flex-auto" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 800 600" style="visibility: visible;">
                 <g>
                     <defs>
@@ -286,14 +286,14 @@
                     </g>
                 </g>
             </svg>
-            <div class="page-404__content flex flex-col">
-                <h1 class="text-[10rem]">404</h1>
-                <div class="flex flex-col text-4xl">
+            <div class="page-404__content flex-auto flex flex-col">
+                <h1 class="text-[1.8rem] font-bold md:text-[3rem] lg:text-[3.5rem]">404</h1>
+                <div class="flex flex-col text-[1.2rem] md:text-[1.7rem] lg:text-[1.85rem]">
                     <span>OOPS. You're lost</span>
                     <span>This page does not exist!</span>
                 </div>
                 <RouterLink to="/">
-                    <div class="btn mt-6 w-[60%] text-center border-4 border-green-400 rounded-full p-4 cursor-pointer">Back to Home</div>
+                    <div class="btn text-[1.2rem] md:text-[1.5rem] lg:text-[1.7rem] mt-6 w-full text-center border-2 lg:border-4 border-green-400 rounded-full p-4 cursor-pointer">Back to Home</div>
                 </RouterLink>
             </div>
         </div>
@@ -305,13 +305,24 @@
 </script>
 
 <style lang="scss" scoped>
+$image-width: 60%;
+$content-width: 100% - $image-width;
+$transition-easing: cubic-bezier(0.075, 0.82, 0.165, 1);
+
 svg {
-    width: 50%;
+    width: $image-width;
 }
+
+.page-404__content {
+    font-size: inherit;
+    width: $content-width;
+}
+
 .btn {
-    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all 0.5s $transition-easing;
     position: relative;
     overflow: hidden;
+    z-index: 2;
     &:hover {
         color: white;
     }
@@ -327,7 +338,7 @@ svg {
         z-index: -1;
         transform: scaleX(0);
         transform-origin: bottom right;
-        transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transition: transform 0.5s $transition-easing;
     }
 
     &:hover::before {

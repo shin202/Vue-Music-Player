@@ -15,7 +15,7 @@ export const getPlaylist = async (id: string): Promise<any> => {
     }
 }
 
-export const getSuggestedPlaylists = async (id: string): Promise<any> => {
+export const getSuggestedPlaylists = async (id: any): Promise<any> => {
     const path = "/api/playlist/section-bottom";
     try {
         const res = await requests.get(path, {
@@ -24,7 +24,7 @@ export const getSuggestedPlaylists = async (id: string): Promise<any> => {
             }
         });
 
-        return res;
+        return res.data;
     } catch (error) {
         console.log(error);
     }

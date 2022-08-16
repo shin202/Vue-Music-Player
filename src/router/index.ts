@@ -1,44 +1,34 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Home from '../views/Home.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
-      name: "Home",
-      component: HomeView
+      path: '/',
+      name: 'Home',
+      component: Home
     },
     {
-      path: "/category",
-      name: "Category",
-      component: () => import(/* webpackChunkName: "category" */ '../views/CategoryView.vue')
+      path: '/categories',
+      name: 'Categories',
+      component: () => import(/*webpackChunkName: "Categories" */ "../views/Categories.vue")
     },
     {
-      path: "/category-detail/:id",
-      name: "CategoryDetail",
-      component: () => import(/* webpackChunkName: "category" */ '../views/CategoryDetailView.vue')
+      path: '/top100',
+      name: 'TOP100',
+      component: () => import(/*webpackChunkName: "TOP100" */ "../views/TOP100.vue")
     },
     {
-      path: "/mv",
-      name: "MV",
-      component: () => import(/* webpackChunkName: "category" */ '../views/MVView.vue')
+      path: '/playlist/:id',
+      name: 'Playlist',
+      component: () => import(/*webpackChunkName: "PlaylistDetail" */ "../views/PlaylistDetail.vue")
     },
     {
-      path: "/top-100",
-      name: "TOP100",
-      component: () => import(/* webpackChunkName: "category" */ '../views/TOP100View.vue')
+      path: '/:pathMatch(.*)*',
+      name: '404NotFound',
+      component: () => import(/*webpackChunkName: "404NotFound" */ "../views/404.vue")
     },
-    {
-      path: "/playlist/:id",
-      name: "Playlist",
-      component: () => import(/* webpackChunkName: "playlist" */ '../views/PlaylistView.vue')
-    },
-    {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      component: () => import(/* webpackChunkName: "playlist" */ '../views/404.vue')
-    }
   ],
 });
 
