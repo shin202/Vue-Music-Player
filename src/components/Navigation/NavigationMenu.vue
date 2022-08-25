@@ -8,17 +8,22 @@
                 :link="item.link"
                 :class="{'active': item.link === $route.path}"
             />
-            <div v-if="$route.name !== 'Playlist'" class="indicator absolute w-full h-full">
+            <!-- Indicator -->
+            <div v-if="isShowIndicator" class="indicator absolute w-full h-full">
                 <div class="indicator__inner container grid grid-cols-5 grid-rows-1 grid-flow-col">
                     <div class="indicator__item"></div>
                 </div>
             </div>
+            <!-- Indicator -->
         </ul>
     </div>
 </template>
 
 <script setup lang="ts">
 import NavigationItem from "./NavigationItem.vue";
+import { home, library, star, statsChart, person } from "../../composables/Icons";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
 interface NavMenu {
     icon: string,
@@ -26,33 +31,40 @@ interface NavMenu {
     link: string,
 }
 
+const route = useRoute();
 const menuItems: NavMenu[] = [
     {
-        icon: "home-outline",
+        icon: home,
         title: "Home",
         link: "/"
     },
     {
-        icon: "library-outline",
+        icon: library,
         title: "Thể loại",
         link: "/categories",
     },
     {
-        icon: "star-outline",
+        icon: star,
         title: "TOP 100",
         link: "/top100",
     },
     {
-        icon: "stats-chart-outline",
+        icon: statsChart,
         title: "BXH",
         link: "#"
     },
     {
-        icon: "person-outline",
+        icon: person,
         title: "Cá nhân",
         link: "#"
     }
 ];
+const navigation = menuItems.map(item => item.link);
+const isShowIndicator = ref<boolean>(true);
+
+watch(route, () => {
+    isShowIndicator.value = navigation.includes(route.path);
+});
 </script>
 
 <style lang="scss">

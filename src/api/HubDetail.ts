@@ -10,7 +10,7 @@ export const getHubDetail = async (id: string | any): Promise<any> => {
             }
         });
     
-        return res;
+        return res.data;
     } catch (error) {
         console.log(error);
     }

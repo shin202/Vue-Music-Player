@@ -12,6 +12,7 @@
                         :items="getPlaylistsInTopic(index)"
                         :isLoading="isLoading"
                         class="m-3"
+                        @click="goTo('CategoriesDetail', { id: topic.encodeId })"
                     />
                 </div>
                 <!-- Skeleton -->
@@ -38,7 +39,9 @@
                         class="nations__item m-3 aspect-square rounded-xl overflow-hidden cursor-pointer"
                     >
                         <div class="thumbnail">
-                            <img v-lazy="item.thumbnailR" :alt="item.title" class="w-full h-full object-cover hover:scale-110 transition-transform ease-out-expo duration-[0.5s]">
+                            <RouterLink :to="`/categories-detail/${item.encodeId}`">
+                                <img v-lazy="item.thumbnailR" :alt="item.title" class="w-full h-full object-cover hover:scale-110 transition-transform ease-out-expo duration-[0.5s]">
+                            </RouterLink>
                         </div>
                     </div>
                 </div>
@@ -82,7 +85,9 @@ import Skeleton from "../components/Skeleton/Skeleton.vue";
 import { getHubHome } from "../api/HubHome";
 import { ref, computed, onMounted } from "vue";
 import type { Hub } from "../types/Types";
+import { useRouter, type RouteParamsRaw } from "vue-router";
 
+const router = useRouter();
 const isLoading = ref<boolean>(true);
 const hubData = ref<Hub>();
 const topTopics = ref<number>(5);
@@ -100,6 +105,10 @@ const getPlaylistsInTopic = (index: number): any => {
 const showAllTopics = (): void => {
     topTopics.value = hubData.value?.topic.length ?? 0;
     isShowAllTopics.value = true;
+}
+
+const goTo = (routerName: string, params: object) => {
+    router.push({ name: routerName, params: { ...params }});
 }
 
 onMounted(async () => {

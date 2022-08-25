@@ -1,13 +1,13 @@
 <template>
     <div class="search-box text-black">
         <form class="relative flex justify-center items-center" @submit.prevent="handleSubmit">
-            <ion-icon name="search-outline" class="absolute left-[5%] text-4xl"></ion-icon>
+            <img :src="search" alt="search" class="absolute w-[2.5rem] h-[2.5rem] left-[5%] text-4xl">
             <input type="search" name="search" class="w-full px-[4rem] py-4 outline-none border-none rounded-full bg-gray-200"
                 autocomplete="off"
                 v-model="searchQuery"
             >
             <Transition name="fade">
-                <ion-icon v-show="searchQuery" name="close-circle" class="text-4xl absolute right-[5%] cursor-pointer" @click="clearQuery"></ion-icon>
+                <img v-show="searchQuery" :src="closeCircle" alt="clear" class="w-[2.5rem] h-[2.5rem] text-4xl absolute right-[5%] cursor-pointer" @click="clearQuery">
             </Transition>
         </form>
     </div>
@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { search, closeCircle } from "../composables/Icons";
 
 const searchQuery = ref<string>('');
 

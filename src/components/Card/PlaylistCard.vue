@@ -7,16 +7,16 @@
             <Skeleton v-else class="aspect-square"/>
             <div v-if="!isLoading" class="playlists__action absolute w-full h-full top-0 flex justify-center items-center space-x-6 text-4xl text-white bg-[rgba(0,0,0,.3)] opacity-0 invisible transition-all ease-out-expo">
                 <VTooltip>
-                    <ion-icon name="heart-outline"></ion-icon>
+                    <img :src="heartOutline" alt="heart" class="w-[2.5rem] h-[2.5rem]">
                     <template #popper>
                         <span class="text-xl">Thêm vào thư viện</span>
                     </template>
                 </VTooltip>
                 <RouterLink :to="`/playlist/${encodeId}`">
-                    <ion-icon name="play-circle-outline" class="text-[5rem]"></ion-icon>
+                    <img :src="playCircle" alt="play" class="w-[5rem] h-[5rem]">
                 </RouterLink>
                 <VTooltip>
-                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                    <img :src="ellipsisVertical" alt="ellipsis" class="w-[2.5rem] h-[2.5rem]">
                     <template #popper>
                         <span class="text-xl">Khác</span>
                     </template>
@@ -34,6 +34,7 @@
 
 <script setup lang="ts">
 import Skeleton from "../Skeleton/Skeleton.vue";
+import { heartOutline, playCircle, ellipsisVertical } from "../../composables/Icons";
 interface Props {
     thumbnail?: string,
     title?: string,

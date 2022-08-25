@@ -1,6 +1,6 @@
 <template>
     <div class="top100-section">
-        <div class="top100 flex-flex-col space-y-16 mt-8">
+        <div v-if="!isLoading" class="top100 flex-flex-col space-y-16 mt-8">
             <Playlists v-for="item in top100"
                 :key="item.title"
                 :playlistTitle="item.title"
@@ -8,6 +8,13 @@
                 :isLoading="isLoading"
             />
         </div>
+        <!-- Skeleton -->
+        <div v-else class="top100 flex-flex-col space-y-16 mt-8">
+            <Playlists v-for="i in 4"
+                :isLoading="isLoading"
+            />
+        </div>
+        <!-- Skeleton -->
     </div>
 </template>
 

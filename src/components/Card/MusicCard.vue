@@ -8,7 +8,7 @@
         <div v-if="!isLoading" class="card__layer absolute w-full h-full top-0 left-0"></div>
         <div v-if="!isLoading"
             class="card__action absolute w-full h-full top-0 left-0 flex justify-center items-center text-[5rem] text-white bg-[rgba(0,0,0,.2)] opacity-0 invisible transition-all ease-out-expo">
-            <ion-icon name="play-circle-outline"></ion-icon>
+            <img :src="playCircle" alt="play" class="w-[5rem] h-[5rem]">
         </div>
         <div v-if="!isLoading"
             class="card__content absolute w-full h-full top-0 flex flex-col justify-end space-y-4 p-4 text-white">
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import Skeleton from '../Skeleton/Skeleton.vue';
 import type { Song, Playlist } from '../../types/Types';
+import { playCircle } from "../../composables/Icons";
 
 interface Props {
     thumbnail?: string,

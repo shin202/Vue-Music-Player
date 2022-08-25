@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import(/*webpackChunkName: "Categories" */ "../views/Categories.vue")
     },
     {
+      path: '/categories-detail/:id',
+      name: 'CategoriesDetail',
+      component: () => import(/*webpackChunkName: "CategoriesDetail" */ "../views/CategoriesDetail.vue")
+    },
+    {
       path: '/top100',
       name: 'TOP100',
       component: () => import(/*webpackChunkName: "TOP100" */ "../views/TOP100.vue")

@@ -27,6 +27,7 @@
                     :list="newReleaseSongs" 
                     :isLoading="isLoadingHome" 
                     :type="1"
+                    :playlistId="''"
                     class="grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-4"
                 />
             </template>
@@ -35,6 +36,7 @@
                     :list="newReleaseAlbums" 
                     :isLoading="isLoadingHome" 
                     :type="0"
+                    :playlistId="''"
                     class="grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-4"
                 />
             </template>
@@ -45,25 +47,35 @@
                 <div class="w-full flex justify-between">
                     <h2 class="text-4xl font-bold max-w-[30rem] truncate">Bảng xếp hạng</h2>
                     <Button>
-                        <span>Tất cả ➡</span>
+                        <span class="flex justify-center items-center space-x-4">
+                            <span>Tất cả</span>
+                            <img :src="arrowForward" alt="forward" class="w-[1.5rem] h-[1.5rem]">
+                        </span>
                     </Button>
                 </div>
                 <MusicList 
                     :list="chart"  
                     :isLoading="isLoadingHome"
+                    :type="1"
+                    :playlistId="''"
                     class="w-full h-full flex flex-col"
                 />
             </div>
         </div>
         <div class="w-full">
             <div class="w-full h-full container">
-                <ul class="flex flex-col md:flex-row items-center">
+                <ul v-if="!isLoadingHome" class="flex flex-col md:flex-row items-center">
                     <li v-for="item in weekChart" :key="item.country" class="w-full h-full md:w-[calc(100%/3)] flex-auto m-3 rounded-md overflow-hidden cursor-pointer">
                         <img 
                             class="w-full h-full object-cover hover:scale-110 transition-transform ease-out-expo duration-700"
                             v-lazy="item.banner" 
                             :alt="item.country"
                         >
+                    </li>
+                </ul>
+                <ul v-else class="flex flex-col md:flex-row items-center">
+                    <li v-for="i in 3" class="w-full h-[5rem] md:w-[calc(100%/3)] flex-auto m-3 rounded-md overflow-hidden cursor-pointer">
+                        <Skeleton/>
                     </li>
                 </ul>
             </div>
@@ -78,10 +90,12 @@ import Tabs from "../components/Tabs/Tabs.vue";
 import MusicList from "../components/MusicList.vue";
 import FavoriteArtists from "../components/FavoriteArtists.vue";
 import Button from "../components/Button/Button.vue";
+import Skeleton from "../components/Skeleton/Skeleton.vue";
 import { ref, onMounted, toRefs, computed } from "vue";
 import type { HomeData, Banner, Playlist, NewRelease, FavoriteArtist, Song, WeekChart } from "../types/Types";
 import { getHome } from "../api/Home";
 import { useGlobal } from "../stores/Global";
+import { arrowForward } from "../composables/Icons";
 
 const { isLoadingHome } = toRefs(useGlobal());
 const homeData = ref<HomeData[]>([]);

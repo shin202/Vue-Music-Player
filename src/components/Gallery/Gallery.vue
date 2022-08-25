@@ -4,11 +4,11 @@
         class="gallery w-full mx-auto mt-[2rem]">
         <div class="gallery__inner container w-full h-full relative flex justify-center items-center">
             <div v-if="!isLoading" class="gallery__navigate absolute flex w-full z-10 text-3xl lg:text-4xl text-white px-8">
-                <div class="gallery__navigate--prev" @click="prevSlide">
-                    <ion-icon name="chevron-back-outline"></ion-icon>
+                <div class="gallery__navigate--prev flex justify-center items-center" @click="prevSlide">
+                    <img :src="chevronBack" alt="chevron-back" class="w-[2.5rem] h-[2.5rem]">
                 </div>
-                <div class="gallery__navigate--next" @click="nextSlide">
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                <div class="gallery__navigate--next flex justify-center items-center" @click="nextSlide">
+                    <img :src="chevronForward" alt="chevron-forward" class="w-[2.5rem] h-[2.5rem]">
                 </div>
             </div>
             <TransitionGroup 
@@ -40,6 +40,7 @@ import Skeleton from "../Skeleton/Skeleton.vue";
 import { ref, onMounted, computed } from "vue";
 import type { Banner } from "../../types/Types";
 import { useGlobal } from "../../stores/Global";
+import { chevronBack, chevronForward } from "../../composables/Icons";
 
 const props = defineProps<{
     items: Banner[],

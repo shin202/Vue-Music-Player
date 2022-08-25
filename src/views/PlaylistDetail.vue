@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="w-full">
-                <MusicList :list="songList" :isLoading="isLoading" :type="1"/>
+                <MusicList :list="songList" :isLoading="isLoading" :type="1" :playlistId="playlistId"/>
             </div>
         </div> 
         <div class="artist-section w-full">
@@ -27,19 +27,28 @@
                     <li 
                         v-for="artist in artists" 
                         :key="artist.id"
-                        class="artist__item m-4 flex flex-col justify-center items-center space-y-6 hover:text-emerald ease-out-expo transition-colors cursor-pointer"
+                        class="artist__item m-8 flex flex-col justify-center items-center space-y-6 hover:text-emerald ease-out-expo transition-colors cursor-pointer"
                     >
-                        <div class="thumbnail rounded-full overflow-hidden">
+                        <div class="thumbnail w-full aspect-square rounded-full overflow-hidden">
                             <img 
+                                v-if="!isLoading"
                                 v-lazy="artist.thumbnail" 
                                 :alt="artist.name"
                                 class="w-full h-full object-cover hover:scale-110 transition-transform ease-out-expo duration-[0.5s]"
                             >
+                            <!-- Skeleton -->
+                            <Skeleton v-else/>
+                            <!-- Skeleton -->
                         </div>
-                        <div class="flex flex-col justify-center items-center space-y-2">
+                        <div v-if="!isLoading" class="flex flex-col justify-center items-center space-y-2">
                             <h3 class="text-2xl font-bold truncate" v-text="artist.name"></h3>
                             <span class="text-xl font-medium text-gray-400 truncate" v-text="`Follower: ${formatNumber(artist.totalFollow)}`"></span>
                         </div>
+                        <!-- Skeleton -->
+                        <div v-else class="w-full h-[4rem] flex flex-col justify-center items-center space-y-2">
+                            <Skeleton v-for="i in 2"/>
+                        </div>
+                        <!-- Skeleton -->
                     </li>
                 </ul>
             </div>
