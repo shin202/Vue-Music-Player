@@ -16,15 +16,15 @@
                 class="favorite-artists__list w-full max-h-[50rem]"
             >
                 <SwiperSlide
-                    v-for="(artist, index) in favoriteArists"
+                    v-for="(artist, index) in artists"
                     :key="artist.encodeId"
                     class="cursor-pointer"
                 >
                     <ArtistCard
-                        :thumbnail="artist.thumbnailM"
-                        :title="artist.artistsNames"
-                        :items="getSongs(index)"
+                        :data="artist"
+                        :footerItems="getSongs(index)"
                         :isLoading="isLoading"
+                        @click="$router.push({ name: 'Playlist', params: { id: artist.encodeId } })"
                     />
                 </SwiperSlide>
             </Swiper>
@@ -60,7 +60,13 @@ interface Props {
 const props = defineProps<Props>();
 const globalStore = useGlobal();
 const isLoading = computed(() => globalStore.isLoadingHome);
-
+const artists = computed(() => 
+    props.favoriteArists.map(artist => ({
+        encodeId: artist.encodeId,
+        thumbnail: artist.thumbnailM,
+        title: artist.artistsNames,
+    }))
+);
 const breakpoints = {
     "640": {
         slidesPerView: 2,

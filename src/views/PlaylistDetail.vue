@@ -2,7 +2,7 @@
     <div class="playlist-detail flex flex-col space-y-16 justify-center items-center">
         <div class="playlist-detail__inner w-full container flex flex-col space-y-16 lg:flex-row lg:space-x-16">
             <div class="flex flex-col justify-center items-center space-y-6 mt-8 w-[70%] self-center md:w-[60%] lg:w-[35%] lg:h-full lg:self-start lg:sticky lg:top-[15%]">
-                <div class="thumbnail w-full aspect-square rounded-xl overflow-hidden">
+                <div class="thumbnail w-[80%] aspect-square rounded-xl overflow-hidden">
                     <img v-if="!isLoading" v-lazy="playlist?.thumbnailM" :alt="playlist?.title" class="w-full h-full object-cover hover:scale-110 transition-transform ease-out-expo duration-[0.5s]">
                     <Skeleton v-else/>
                 </div>

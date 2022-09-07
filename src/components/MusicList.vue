@@ -80,7 +80,7 @@ import { play, pause, ellipsisVertical } from "../composables/Icons";
 interface Props {
     list: Song[] | Playlist[],
     isLoading: boolean,
-    type?: 0 | 1,
+    type?: 0 | 1, 
     playlistId: string,
 }
 
@@ -89,8 +89,6 @@ const props = defineProps<Props>();
 const playerStore = usePlayer();
 const currentSongStore = useCurrentSong();
 const currentSongId = computed(() => currentSongStore.currentSong.encodeId);
-
-playerStore.autoplay();
 </script>
 
 <style lang="scss" scoped>

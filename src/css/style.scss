@@ -10,6 +10,11 @@ html {
     @apply fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,.2)] z-[9998];
 }
 
+.swal2-popup {
+    font-size: 1.6rem !important;
+    font-family: 'Quicksand', sans-serif;
+}
+
 #app {
     @apply text-black bg-white;
     font-family: 'Quicksand', sans-serif;
@@ -36,8 +41,9 @@ html {
     .playlist-detail,
     .categories-detail {
         width: 100%;
-        min-height: calc(100vh - 14rem);
-        margin: 7rem 0;
+        min-height: calc(100vh - 24rem);
+        margin-top: 7rem;
+        margin-bottom: 17rem;
         @apply bg-white;
     }
 

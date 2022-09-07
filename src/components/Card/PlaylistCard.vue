@@ -24,9 +24,9 @@
             </div>
         </div>
         <div class="playlists__content tracking-wider flex flex-col space-y-2">
-            <h3 v-if="!isLoading" class="playlists__title text-3xl font-semibold truncate hover:text-emerald" v-text="title" />
+            <h3 v-if="!isLoading" class="playlists__title text-3xl font-semibold truncate" v-text="title" />
             <Skeleton v-else class="h-[2rem]"/>
-            <span v-if="!isLoading" class="playlists__artists-name text-2xl font-medium text-gray-400 truncate hover:text-emerald" v-text="artistsName" />
+            <span v-if="!isLoading" class="playlists__artists-name text-2xl font-medium text-gray-400 truncate" v-text="artistsName" />
             <Skeleton v-else class="h-[1.5rem]"/>
         </div>
     </div>
@@ -48,6 +48,10 @@ const props = defineProps<Props>();
 
 <style lang="scss" scoped>
 .playlists {
+    &__item:hover > &__content {
+        @apply text-emerald;
+    }
+
     &__thumbnail {
         > img {
             transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);

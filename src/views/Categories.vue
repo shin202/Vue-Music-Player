@@ -6,13 +6,11 @@
                 <h2 class="text-4xl font-bold h-[3rem] max-w-[30rem] truncate">Tâm trạng và hoạt động</h2>
                 <div v-if="!isLoading" class="topics__list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                     <GenreCard v-for="(topic, index) in topics"
-                        :key="topic.encodeId"
-                        :thumbnail="topic.thumbnailR"
-                        :title="topic.title"
-                        :items="getPlaylistsInTopic(index)"
+                        :data="topic"
+                        :footerItems="getPlaylistsInTopic(index)"
                         :isLoading="isLoading"
                         class="m-3"
-                        @click="goTo('CategoriesDetail', { id: topic.encodeId })"
+                        @click="$router.push({ name: 'CategoriesDetail', params: { id: topic.encodeId } })"
                     />
                 </div>
                 <!-- Skeleton -->
@@ -85,13 +83,20 @@ import Skeleton from "../components/Skeleton/Skeleton.vue";
 import { getHubHome } from "../api/HubHome";
 import { ref, computed, onMounted } from "vue";
 import type { Hub } from "../types/Types";
-import { useRouter, type RouteParamsRaw } from "vue-router";
 
-const router = useRouter();
 const isLoading = ref<boolean>(true);
 const hubData = ref<Hub>();
 const topTopics = ref<number>(5);
-const topics = computed(() => hubData.value?.topic.slice(0, topTopics.value));
+const topics = computed(() => (
+    hubData.value?.topic
+    .slice(0, topTopics.value)
+    .map((topic) => ({
+        encodeId: topic.encodeId,
+        thumbnail: topic.thumbnailR,
+        title: topic.title,
+        playlists: topic.playlists,
+    }))
+));
 const isShowAllTopics = ref<boolean>(false); 
 const nations = computed(() => hubData.value?.nations);
 const genres = computed(() => hubData.value?.genre);
@@ -105,10 +110,6 @@ const getPlaylistsInTopic = (index: number): any => {
 const showAllTopics = (): void => {
     topTopics.value = hubData.value?.topic.length ?? 0;
     isShowAllTopics.value = true;
-}
-
-const goTo = (routerName: string, params: object) => {
-    router.push({ name: routerName, params: { ...params }});
 }
 
 onMounted(async () => {

@@ -16,6 +16,11 @@ import star from "../assets/icons/star-outline.svg";
 import statsChart from "../assets/icons/stats-chart-outline.svg";
 import closeCircle from "../assets/icons/close-circle.svg";
 import arrowForward from "../assets/icons/arrow-forward-outline.svg";
+import next from "../assets/icons/play-skip-forward-outline.svg";
+import prev from "../assets/icons/play-skip-back-outline.svg";
+import shuffle from "../assets/icons/shuffle-outline.svg";
+import volumeHigh from "../assets/icons/volume-high-outline.svg";
+import volumeMute from "../assets/icons/volume-mute-outline.svg";
 
 export { 
         avatar, chevronBack, 
@@ -26,5 +31,7 @@ export {
         play, search,
         settings, star, 
         statsChart, closeCircle,
-        pause, arrowForward
+        pause, arrowForward,
+        next, prev, shuffle,
+        volumeHigh, volumeMute
     };
