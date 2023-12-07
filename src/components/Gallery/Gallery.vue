@@ -89,7 +89,7 @@ onMounted(() => {
     });
     gallery.value?.addEventListener("mouseleave", () => {
         runSlide.value = requestAnimationFrame(autoplay);
-    })
+    });
 });
 </script>
 

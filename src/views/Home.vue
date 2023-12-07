@@ -8,23 +8,28 @@
         <div v-else class="playlists-section flex flex-col space-y-16">
             <Playlists v-for="i in 5" :isLoading="isLoadingHome" />
         </div>
-        <Tabs :TabCount="2">
+        <Tabs :TabCount="3">
             <template #tabsTitle>
                 <h2 class="text-4xl font-bold h-[3rem] max-w-[30rem] truncate">Mới phát hành</h2>
             </template>
             <template #heading1>
                 <div class="border-2 border-gray-400 rounded-full p-2 hover:bg-third transition-colors ease-out-expo">
-                    Bài Hát
+                    Tất cả
                 </div>
             </template>
             <template #heading2>
                 <div class="border-2 border-gray-400 rounded-full p-2 hover:bg-third transition-colors ease-out-expo">
-                    Albums
+                    Việt Nam
                 </div>
             </template>
+          <template #heading3>
+            <div class="border-2 border-gray-400 rounded-full p-2 hover:bg-third transition-colors ease-out-expo">
+              Quốc tế
+            </div>
+          </template>
             <template #body1>
                 <MusicList 
-                    :list="newReleaseSongs" 
+                    :list="newReleaseAll"
                     :isLoading="isLoadingHome" 
                     :type="1"
                     :playlistId="''"
@@ -33,15 +38,23 @@
             </template>
             <template #body2>
                 <MusicList 
-                    :list="newReleaseAlbums" 
+                    :list="newReleaseVPop"
                     :isLoading="isLoadingHome" 
                     :type="0"
                     :playlistId="''"
                     class="grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-4"
                 />
             </template>
+          <template #body3>
+            <MusicList
+              :list="newReleaseOthers"
+              :isLoading="isLoadingHome"
+              :type="0"
+              :playlistId="''"
+              class="grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-4"
+            />
+          </template>
         </Tabs>
-        <FavoriteArtists :favoriteArists="favoriteArtists"/>
         <div class="chart w-full text-2xl">
             <div class="chart__inner container flex flex-col justify-center items-center space-y-8">
                 <div class="w-full flex justify-between">
@@ -116,10 +129,10 @@ const setHomeData = (data: HomeData): void => {
 
 const getBanner = (): any => homeData.value.find(data => data.sectionType === "banner")?.items;
 const getPlaylists = (): any => homeData.value.filter(data => data.sectionType === "playlist");
-const getNewRelease = (): any => homeData.value.find(data => data.sectionType === "new-release")?.items.pop();
-const getFavoriteArtists = (): any => homeData.value.find(data => data.sectionType === "mix")?.items;
-const newReleaseSongs = computed(() => newRelease.value ? newRelease.value.song : []);
-const newReleaseAlbums = computed(() => newRelease.value ? newRelease.value.album : []);
+const getNewRelease = (): any => homeData.value.find(data => data.sectionType === "new-release")?.items;
+const newReleaseAll = computed(() => newRelease.value ? newRelease.value.all : []);
+const newReleaseVPop = computed(() => newRelease.value ? newRelease.value.vPop : []);
+const newReleaseOthers = computed(() => newRelease.value ? newRelease.value.others : []);
 const getChart = (): any => homeData.value.find(data => data.sectionType === "RTChart")?.items;
 const getWeekChart = (): any => homeData.value.find(data => data.sectionType === "weekChart")?.items;
 
@@ -130,7 +143,6 @@ onMounted(async () => {
     banner.value = getBanner();
     playlists.value = getPlaylists();
     newRelease.value = getNewRelease();
-    favoriteArtists.value = getFavoriteArtists();
     chart.value = getChart();
     weekChart.value = getWeekChart();
     setLoadingStatus(false);

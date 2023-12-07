@@ -11,11 +11,13 @@ interface Banner {
     cover: string,
     description: string,
     encodeId: string,
+    link: string,
 }
 
 interface NewRelease {
-    album: Playlist[],
-    song: Song[],
+    all: Playlist[],
+    vPop: Playlist[],
+    others: Playlist[],
 }
 
 interface WeekChart {
